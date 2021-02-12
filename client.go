@@ -158,7 +158,7 @@ func getBodyReaderAndContentLength(rawBody interface{}) (ReaderFunc, int64, erro
 	if isNil(rawBody) {
 		return bodyReader, contentLength, nil
 	}
-
+	fmt.Println("_______________")
 	switch body := rawBody.(type) {
 	// If they gave us a function already, great! Use it.
 	case ReaderFunc:
@@ -190,6 +190,7 @@ func getBodyReaderAndContentLength(rawBody interface{}) (ReaderFunc, int64, erro
 	// If a regular byte slice, we can read it over and over via new
 	// readers
 	case []byte:
+		fmt.Println("==", string(body))
 		buf := body
 		bodyReader = func() (io.Reader, error) {
 			return bytes.NewReader(buf), nil
